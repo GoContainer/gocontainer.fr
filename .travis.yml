@@ -17,7 +17,7 @@ before_script:
 
 script: npm install -g hexo
 
-after_script: hexo deploy
+after_success: hexo deploy
 
 env:
   global:
