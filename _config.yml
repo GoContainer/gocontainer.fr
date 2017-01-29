@@ -69,5 +69,5 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:GoContainer/gocontainer.fr.git
+  repo: https://${GH_TOKEN}:@github.com/GoContainer/gocontainer.fr.git
   branch: gh-pages
