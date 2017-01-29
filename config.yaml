@@ -1,0 +1,42 @@
+baseurl: http://gocontainer.fr/
+disqusShortname: GoContainer
+footnotereturnlinkcontents: ↩
+googleAnalytics: ''
+languageCode: fr-fr
+paginate: 10
+
+taxonomies:
+  category: "category"
+  tag: "tag"
+
+params:
+  author: Go Container
+  avatar: /images/avatar.png
+  bio: Blog
+  copyright: Go Container - © Copyright
+  custom_css: []
+  custom_js: []
+  date_format: '2006-01-02'
+  disable_mathjax: false
+  logo: /images/logo.png
+  menu:
+  - before: true
+    label: Home
+    link: /
+  - before: false
+    label: Contribuer
+    link: contribuer/
+  profile:
+    follow_button: https://github.com/digitalcraftsman
+  site_description: ''
+  widgets:
+    categories: true
+    recent_articles: true
+    tag_cloud: true
+    tags: true
+permalinks:
+  post: /:slug
+
+
+theme: gocontainer
+title: Go Container

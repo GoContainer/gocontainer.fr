@@ -1,0 +1,10 @@
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      {{ with .Site.Params.copyright }}{{ . | markdownify}}{{ end }} {{.Now.Format "2006"}}
+    </div>
+  </div>
+</footer>
+
+{{ partial "footer_js" . }}
+{{ partial "footer_custom_js" . }}

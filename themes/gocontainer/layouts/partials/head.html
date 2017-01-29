@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<head>
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
+    {{ .Hugo.Generator }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+    {{ with .Description }}
+      <meta name="description" content="{{ . }}">
+    {{ else }}
+      <meta name="description" content="{{ .Site.Params.site_description }}">
+    {{ end }}
+    {{ with .RSSLink }}
+      <link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+      <link href="{{ . }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+    {{ end }}
+    <link rel="canonical" href="{{ .Permalink }}"/>
+    <link rel="icon" href="{{ "favicon.png" | absURL }}">
+    <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | absURL }}"/>
+
+    <link rel="stylesheet" href="{{ "css/gocontainer.css" | absURL }}">
+    <script src="{{ "js/gocontainer.js" | absURL }}"></script>
+
+    {{ range .Site.Params.custom_css }}
+        <link rel="stylesheet" href="{{ . | absURL }}">
+    {{ end }}
+    {{ partial "head_custom" . }}
+
+    {{ if .Params.disable_profile | and .Params.disable_widgets }}
+    <style>
+        .full-width {
+            width: 100% !important;
+        }
+    </style>
+    {{ end }}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">

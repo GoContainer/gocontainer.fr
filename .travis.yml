@@ -1,0 +1,29 @@
+language: go
+
+go:
+  - 1.7
+
+branches:
+  only:
+  - master
+
+before_install:
+  - git config --global user.name 'Travis'
+  - git config --global user.email 'travis@travis-ci.org'
+
+# Maybe add minification scripts here
+install:
+  - make build
+
+script:
+  - ./bin/hugo version
+
+after_success:
+- mkdir deploy && cd deploy
+- git init && git remote add origin https://$GH_TOKEN@github.com/GoContainer/gocontainer.fr.git && git checkout -b gh-pages
+- rm -rf *                      # Clear old verion
+- cp -r ../public/* .             # Copy over files for new version
+- git add -A .          
+- git commit -m 'Site updated wich Travis'    # Make a new commit for new version
+- git branch -m gh-pages
+- git push -q -u origin gh-pages --force  # Push silently so we don't leak information
