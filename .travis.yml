@@ -9,4 +9,5 @@ script:
 - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 - git remote remove origin
 - git remote add origin https://${GH_TOKEN}:@github.com/GoContainer/gocontainer.fr.git
+- git remote set-url origin https://${GH_TOKEN}:@github.com/GoContainer/gocontainer.fr.git
 - npm install && hexo deploy
