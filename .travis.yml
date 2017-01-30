@@ -3,14 +3,10 @@ sudo: false
 node_js:
 - '7'
 
-env:
-  global:
-    - secure: P62s73xico3bijgJLcfBxzAIwhMkljbT+PXm/Gq80X+7a/Kvq/g/KJOVuvQAIJi+3m3Mo2DUG4jXCQIhXq48BLV5cK9IechuuDjGXZR0IRSfNPqhEBQPdtVe9ixbFv/FsMErXee0ju2nhsXcm0EmzimYQ/NTLVxyRTkCsSCIs3wxelXj7+mrUC8R+sRD+GttaPuIHLT6hpUCW02qhmzIaOhMzTQppxZwVN/ffcxtCs3JH1bHfxnU+C1GAv5a0dASGiRwxaD/RD3tdF3HcYTx/cSwDejNRAKSTmWbER8OuofMb2thssjglORxUiJf9wck2ft+f1MFrCmNjltPfIROIkeI/l6EOUydcax7OC5TJA9137GsgNOFPBW/d96JXAnAge60TFVbkfhZhn8D68hDHmILw6BQuWU891QzeBYma8/BRWDz+Fs5bVWNl+DOZ9d76g6tUunjDPjgRrwymcdbrzlfxnrAUiGc/AP8YCCRaSezLVUYbQEsoITdpMZI4RXG/JU9dunInNIet2vID0p9B6KqKUXqOmKbg75qhV84hxTcChd2AME6ll43aarRwmLvWyIJevkVmS6zJUZiEXxQkpXD4d9y1B2XqHDR6dW80UYqrDyiEM3wTNhBAkaExToe2xmfQ0yNHvTaAmd+ZL76n3YfvPFg0iUY2ETAhcg+UXE=
-    - GIT_DEPLOY_REPO=https://$GH_TOKEN@github.com/GoContainer/gocontainer.fr.git
-
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: .travis/deploy.sh
-  on:
-    branch: master
+install: npm install -g hexo
+script:
+- git config credential.helper "store --file=.git/credentials"
+- echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+- git remote remove origin
+- git remote add origin https://${GH_TOKEN}:@github.com/GoContainer/gocontainer.fr.git
+- hexo deploy
