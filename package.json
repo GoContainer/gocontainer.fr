@@ -2,6 +2,10 @@
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
+  "name": "gocontainer.fr",
+  "homepage": "http://gocontainer.fr",
+  "authors": "https://github.com/GoContainer/gocontainer.fr/graphs/contributors",
+  "repository": "https://github.com/GoContainer/gocontainer.fr.git",
   "hexo": {
     "version": "3.2.2"
   },
