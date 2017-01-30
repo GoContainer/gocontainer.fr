@@ -71,3 +71,5 @@ deploy:
   type: github
   repo: https://${GH_TOKEN}:@github.com/GoContainer/gocontainer.fr.git
   branch: gh-pages
+  name: Travis
+  email: github@travis-ci.org
