@@ -69,7 +69,7 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://${GH_TOKEN}:@github.com/GoContainer/gocontainer.fr.git
+  repo: https://github.com/GoContainer/gocontainer.fr.git
   branch: gh-pages
   name: Travis
   email: github@travis-ci.org
