@@ -13,7 +13,7 @@ install:
   - hugo -v
 
 script:
-  - hugo -b https://flemzord.github.io/hugo/
+  - hugo -b http://gocontainer.fr/
 
 after_success:
 - mkdir deploy && cd deploy
