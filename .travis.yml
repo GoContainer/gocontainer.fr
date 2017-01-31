@@ -1,28 +1,24 @@
-language: node_js
+language: go
 
-node_js:
-- "6"
+go:
+  - 1.7
 
 before_install:
-- npm install -g hexo
-
-install:
-- npm install
-
-before_script:
-- git config --global user.name 'Travis'
-- git config --global user.email 'travis@travis-ci.org'
+  - go get -v github.com/spf13/hugo
+  - git config --global user.name 'Travis'
+  - git config --global user.email 'travis@travis-ci.org'
 
 # Maybe add minification scripts here
+install:
+  - hugo -v
+
 script:
-- hexo generate
+  - hugo -b https://flemzord.github.io/hugo/
 
 after_success:
-- mkdir .deploy                   # Create a folder to use for teh pages branch
-- cd .deploy
-- git clone --depth 1 --branch gh-pages --single-branch $DEPLOY_REPO . || (git init && git remote add origin $DEPLOY_REPO)
-- git init && git remote add origin https://$GH_TOKEN@github.com/GoContainer/gocontainer.fr.git
-- rm -rf ./*                      # Clear old verion
+- mkdir deploy && cd deploy
+- git init && git remote add origin https://$GH_TOKEN@github.com/GoContainer/gocontainer.fr.git && git checkout -b gh-pages
+- rm -rf *                      # Clear old verion
 - cp -r ../public/* .             # Copy over files for new version
 - git add -A .          
 - git commit -m 'Site updated wich Travis'    # Make a new commit for new version
