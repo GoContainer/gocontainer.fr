@@ -1,5 +1,5 @@
 +++
-title = "Creating a new theme"
+title = "Creating a new (theme modified)"
 date = "2015-06-24T13:50:46+02:00"
 tags = ["theme"]
 categories = ["starting"]
