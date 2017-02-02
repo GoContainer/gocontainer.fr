@@ -18,7 +18,7 @@ theme = "gocontainer"
 
 [params]
     # Tell me who you are
-    author = "John Doe"
+    author = "Maxence Maireaux"
     bio = "Blogger - Programmer - Gopher"
     location = "Earth"
     site_description = ""
@@ -64,7 +64,7 @@ theme = "gocontainer"
 # Add your social network accounts to the profile section on the left
 # by entering your username. The links to your account will be
 # created automatically.
-    github          = "digitalcraftsman"
+    github          = "GoContainer"
     gitlab          = ""
     bitbucket       = ""
     jsfiddle        = ""
@@ -75,7 +75,7 @@ theme = "gocontainer"
     behance         = ""
     flickr          = ""
     instagram       = ""
-    youtube         = ""
+    youtube         = "GoContainer"
     vimeo           = ""
     vine            = ""
     medium          = ""
@@ -88,10 +88,10 @@ theme = "gocontainer"
     reddit          = ""
     pinterest       = ""
     googleplus      = ""
-    facebook        = ""
+    facebook        = "GoContainer"
     facebook_admin  = ""
     twitter_domain  = ""
-    twitter         = "spf13"
+    twitter         = "GoContainer"
 
 # Enable and disable widgets for the right sidebar
 [params.widgets]
