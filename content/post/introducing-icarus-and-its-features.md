@@ -1,6 +1,6 @@
 ---
 author: Maxence Maireaux2
-avatar: "https://pbs.twimg.com/profile_images/830696187967594496/hJHv3by3.jpg"
+avatar: https://pbs.twimg.com/profile_images/830696187967594496/hJHv3by3.jpg
 social:
   github: flemzord
   twitter: flemzord

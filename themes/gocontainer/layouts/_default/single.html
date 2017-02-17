@@ -10,10 +10,6 @@
 		{{ if .IsPage | and (not .Params.disable_profile) }}
 		{{ partial "profile" . }}
 		{{ end }}
-
-		{{ if .IsPage | and (not .Params.disable_widgets) }}
-	    {{ partial "sidebar" . }}
-	    {{ end }}
 	</div>
 </div>
 

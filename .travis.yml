@@ -14,9 +14,6 @@ before_install:
 
 # Maybe add minification scripts here
 install:
-  - hugo -v
-
-script:
   - hugo -b http://gocontainer.fr/
 
 after_success:
