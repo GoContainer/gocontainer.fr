@@ -1,6 +1,11 @@
 ---
 author: Maxence Maireaux2
-banner: banners/placeholder.png
+avatar: "https://pbs.twimg.com/profile_images/830696187967594496/hJHv3by3.jpg"
+social:
+  github: flemzord
+  twitter: flemzord
+
+banner: "banners/placeholder.png"
 categories:
 - theme
 date: 2015-10-10T16:56:43+02:00

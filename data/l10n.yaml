@@ -1,29 +1,29 @@
 articles:
-  comments: Comments
+  comments: Commentaires
   linked_posts:
-    newer: Newer
-    older: Older
-  read_more: Read more
-  readingtime: minute read
-  share: Share
-  words: words
+    newer: Nouveau
+    older: Ancien
+  read_more: Lire plus
+  readingtime: minute à lire
+  share: Partage
+  words: Mots
 page_not_found:
   subtitle: The content you're looking for doesn't seem to exist.
   title: 404 - page not found
 pagination:
-  next: Next
-  previous: Prev
+  next: Suivant
+  previous: Précédent
 profile:
-  follow_button: Follow
-  posts: Posts
+  follow_button: Suivre
+  posts: Articles
   tags: Tags
 search:
-  placeholder: Search
+  placeholder: Recherche
 widgets:
   categories:
-    title: Categories
+    title: Catégories
   recent_articles:
-    title: Recents
+    title: Récents
   tag_cloud:
     title: Tag cloud
   tags:

@@ -35,34 +35,6 @@ params:
     tags: true
 permalinks:
   post: /:year/:month/:day/:slug
-social:
-  behance: ''
-  bitbucket: ''
-  codepen: ''
-  deviantart: ''
-  dribbble: ''
-  facebook: GoContainer
-  facebook_admin: ''
-  flickr: ''
-  foursquare: ''
-  github: GoContainer
-  gitlab: ''
-  googleplus: ''
-  instagram: ''
-  jsfiddle: ''
-  linkedin: ''
-  medium: ''
-  pinterest: ''
-  reddit: ''
-  slideshare: ''
-  stackoverflow: ''
-  tumblr: ''
-  twitter: GoContainer
-  twitter_domain: ''
-  vimeo: ''
-  vine: ''
-  wordpress: ''
-  xing: ''
-  youtube: GoContainer
+
 theme: gocontainer
 title: Go Container
