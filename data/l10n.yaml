@@ -14,7 +14,7 @@ pagination:
   next: Next
   previous: Prev
 profile:
-  follow_button: Follow
+  follow_button: Suivre
   posts: Posts
   tags: Tags
 search:
