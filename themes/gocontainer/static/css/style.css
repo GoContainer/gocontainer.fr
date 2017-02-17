@@ -190,6 +190,14 @@ code {
     margin: 0 0.769230769230769%;
   }
 }
+@media screen and (min-width: 1200px) {
+    #home {
+        display: inline;
+        float: left;
+        width: 100%;
+        margin: 0 0.769230769230769%;
+    }
+}
 @media screen and (min-width: 800px) and (max-width: 1199px) {
   #main {
     display: inline;
