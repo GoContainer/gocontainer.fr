@@ -35,6 +35,6 @@ params:
     tags: true
 permalinks:
   post: /:year/:month/:day/:slug
-  
+
 theme: gocontainer
 title: Go Container
