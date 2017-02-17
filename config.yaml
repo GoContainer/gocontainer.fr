@@ -1,0 +1,68 @@
+baseurl: http://gocontainer.fr/
+disqusShortname: spf13
+footnotereturnlinkcontents: ↩
+googleAnalytics: ''
+languageCode: fr-fr
+paginate: 10
+params:
+  author: Maxence Maireaux
+  avatar: css/images/avatar.png
+  bio: Blogger - Programmer - Gopher
+  copyright: Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice).
+  custom_css: []
+  custom_js: []
+  date_format: '2006-01-02'
+  disable_mathjax: false
+  location: Earth
+  logo: css/images/logo.png
+  menu:
+  - before: true
+    label: Home
+    link: /
+  - before: false
+    label: Tags
+    link: tags/
+  - before: false
+    label: Categories
+    link: categories/
+  profile:
+    follow_button: https://github.com/digitalcraftsman
+  site_description: ''
+  widgets:
+    categories: true
+    recent_articles: true
+    tag_cloud: true
+    tags: true
+permalinks:
+  post: /:year/:month/:day/:slug
+social:
+  behance: ''
+  bitbucket: ''
+  codepen: ''
+  deviantart: ''
+  dribbble: ''
+  facebook: GoContainer
+  facebook_admin: ''
+  flickr: ''
+  foursquare: ''
+  github: GoContainer
+  gitlab: ''
+  googleplus: ''
+  instagram: ''
+  jsfiddle: ''
+  linkedin: ''
+  medium: ''
+  pinterest: ''
+  reddit: ''
+  slideshare: ''
+  stackoverflow: ''
+  tumblr: ''
+  twitter: GoContainer
+  twitter_domain: ''
+  vimeo: ''
+  vine: ''
+  wordpress: ''
+  xing: ''
+  youtube: GoContainer
+theme: gocontainer
+title: Go Container
