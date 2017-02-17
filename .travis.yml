@@ -16,6 +16,9 @@ before_install:
 install:
   - hugo -b http://gocontainer.fr/
 
+script:
+  - hugo version
+
 after_success:
 - mkdir deploy && cd deploy
 - git init && git remote add origin https://$GH_TOKEN@github.com/GoContainer/gocontainer.fr.git && git checkout -b gh-pages
