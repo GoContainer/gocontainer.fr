@@ -1425,6 +1425,7 @@ ol.toc {
   }
 }
 .archive-article .archive-article-thumbnail {
+  float: left;
   width: 160px;
   padding-right: 15px;
 }

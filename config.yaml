@@ -5,23 +5,19 @@ googleAnalytics: ''
 languageCode: fr-fr
 paginate: 10
 params:
-  author: Maxence Maireaux
+  author: Go Container
   avatar: css/images/avatar.png
-  bio: Blogger - Programmer - Gopher
-  copyright: Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice).
+  bio: Blog
+  copyright: Blog Go container
   custom_css: []
   custom_js: []
   date_format: '2006-01-02'
   disable_mathjax: false
-  location: Earth
   logo: css/images/logo.png
   menu:
   - before: true
     label: Home
     link: /
-  - before: false
-    label: Tags
-    link: tags/
   - before: false
     label: Categories
     link: categories/
