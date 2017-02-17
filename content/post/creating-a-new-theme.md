@@ -1,11 +1,13 @@
-+++
-title = "Creating a new (theme modified)"
-date = "2015-06-24T13:50:46+02:00"
-tags = ["theme"]
-categories = ["starting"]
-menu = ""
-banner = "banners/placeholder.png"
-+++
+---
+banner: banners/placeholder.png
+categories:
+- starting
+date: 2015-06-24T13:50:46+02:00
+menu: ""
+tags:
+- theme
+title: Creating a new (theme modified)
+---
 
 ## Introduction
 
