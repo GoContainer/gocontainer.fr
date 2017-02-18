@@ -19,8 +19,8 @@ params:
     label: Home
     link: /
   - before: false
-    label: Categories
-    link: categories/
+    label: Contribuer
+    link: contribuer/
   profile:
     follow_button: https://github.com/digitalcraftsman
   site_description: ''
