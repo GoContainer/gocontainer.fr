@@ -8,7 +8,7 @@ params:
   author: Go Container
   avatar: css/images/avatar.png
   bio: Blog
-  copyright: Blog Go container
+  copyright: Go Container - © Copyright 2017
   custom_css: []
   custom_js: []
   date_format: '2006-01-02'
