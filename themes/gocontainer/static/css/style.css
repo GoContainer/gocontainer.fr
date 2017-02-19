@@ -821,6 +821,11 @@ code {
 .article {
   margin: 40px 0;
 }
+.article-home {
+  width: 48%;
+  margin-left: 1rem;
+  float: left;
+}
 .article-inner {
   overflow: hidden;
 }
@@ -851,12 +856,23 @@ a.article-title:hover {
   .article-title {
     font-size: 1.6em;
   }
+  .article-home {
+    width: 100%;
+    margin: 0;
+    float: inherit;
+  }
 }
 @media screen and (min-width: 560px) and (max-width: 799px) {
   .article-title {
     font-size: 1.6em;
   }
+  .article-home {
+    width: 100%;
+    margin: 0;
+    float: inherit;
+  }
 }
+
 .article-meta {
   line-height: 1.6em;
 }
