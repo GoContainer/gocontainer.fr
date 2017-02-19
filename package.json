@@ -1,0 +1,27 @@
+{
+  "name": "datacube",
+  "version": "1.0.0",
+  "description": "datacube-api ============",
+  "main": "gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/datacube-sas/api.git"
+  },
+  "author": "Maxence Maireaux",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/datacube-sas/api#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^2.0.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-less": "^3.1.0",
+    "gulp-load-plugins": "^1.3.0"
+  }
+}

@@ -6,14 +6,14 @@ languageCode: fr-fr
 paginate: 10
 params:
   author: Go Container
-  avatar: css/images/avatar.png
+  avatar: /images/avatar.png
   bio: Blog
   copyright: Go Container - © Copyright
   custom_css: []
   custom_js: []
   date_format: '2006-01-02'
   disable_mathjax: false
-  logo: css/images/logo.png
+  logo: /images/logo.png
   menu:
   - before: true
     label: Home
