@@ -372,7 +372,21 @@ code {
 }
 #sub-nav,
 #search-form-wrap {
-  float: right;
+     float: right;
+ }
+
+.social-header-link {
+    float: right;
+    padding-top: 1rem;
+    font-size: 25px;
+}
+
+.social-header-link a {
+    padding-right: 1rem;
+}
+
+#social-form-wrap {
+    float: right;
 }
 .header-inner {
   height: 100%;
