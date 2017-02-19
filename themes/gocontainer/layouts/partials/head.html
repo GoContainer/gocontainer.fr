@@ -18,19 +18,13 @@
     <link rel="canonical" href="{{ .Permalink }}"/>
     <link rel="icon" href="{{ "favicon.png" | absURL }}">
     <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | absURL }}"/>
-    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "css/font-awesome.min.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "css/monokai.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "fancybox/jquery.fancybox.css" | absURL }}">
+
+    <link rel="stylesheet" href="{{ "css/gocontainer.css" | absURL }}">
+    <script src="{{ "js/gocontainer.js" | absURL }}"></script>
+
     {{ range .Site.Params.custom_css }}
-    <link rel="stylesheet" href="{{ . | absURL }}">
+        <link rel="stylesheet" href="{{ . | absURL }}">
     {{ end }}
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    {{ template "_internal/opengraph.html" . }}
-    {{ template "_internal/google_news.html" . }}
-    {{ template "_internal/schema.html" . }}
-    {{ template "_internal/twitter_cards.html" . }}
     {{ partial "head_custom" . }}
 
     {{ if .Params.disable_profile | and .Params.disable_widgets }}
@@ -41,8 +35,6 @@
     </style>
     {{ end }}
 
-    <!-- needs to be loaded first for following scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
