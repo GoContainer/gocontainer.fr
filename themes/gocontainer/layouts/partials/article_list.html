@@ -1,7 +1,7 @@
 <section id="home">
     {{ $paginator := .Paginate (where .Site.Pages "Type" "post") }}
     {{ range $paginator.Pages }}
-    <article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article class="article article-home article-type-post" itemscope="" itemprop="blogPost">
         <div class="article-inner">
             {{ if and (isset .Params "banner") (not (eq .Params.banner "")) }}
             <a href="{{ .Permalink }}" itemprop="url">
