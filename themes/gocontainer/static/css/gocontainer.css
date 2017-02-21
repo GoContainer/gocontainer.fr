@@ -813,7 +813,7 @@ td {
   font-weight: inherit;
   font-style: inherit;
   font-family: inherit;
-  font-size: 100%;
+  font-size: 103%;
   vertical-align: baseline;
 }
 body {
@@ -1140,7 +1140,7 @@ code {
   display: inline-block;
 }
 .header-inner #logo .site-title {
-  font-size: 16px;
+  font-size: 25px;
   display: inline-block;
   vertical-align: top;
   font-weight: 600;
