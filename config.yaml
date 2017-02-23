@@ -16,7 +16,7 @@ params:
   copyright: Go Container - © Copyright
   custom_css: []
   custom_js: []
-  date_format: '2006-01-02'
+  date_format: '02-01-2006'
   disable_mathjax: false
   logo: /images/logo.png
   menu:
