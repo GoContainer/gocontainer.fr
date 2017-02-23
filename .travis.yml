@@ -23,7 +23,6 @@ after_success:
 - mkdir deploy && cd deploy
 - git init && git remote add origin https://$GH_TOKEN@github.com/GoContainer/gocontainer.fr.git && git checkout -b gh-pages
 - rm -rf *                      # Clear old verion
-- rm -rf ../public/post
 - cp -r ../public/* .             # Copy over files for new version
 - git add -A .          
 - git commit -m 'Site updated wich Travis'    # Make a new commit for new version

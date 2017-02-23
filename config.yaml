@@ -30,7 +30,7 @@ params:
     tag_cloud: true
     tags: true
 permalinks:
-  post: /:slug
+  post: /:year/:month/:day/:slug
 
 theme: gocontainer
 title: Go Container
