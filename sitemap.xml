@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway</loc>
+    <lastmod>2017-02-25T12:56:43+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://gocontainer.fr/hack-pour-docker</loc>
+    <lastmod>2017-02-20T16:56:43+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://gocontainer.fr/contribuer/</loc>
+    <lastmod>2017-02-18T15:06:13+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://gocontainer.fr/</loc>
+    <lastmod>2017-02-25T12:56:43+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gocontainer.fr/post/</loc>
+    <lastmod>2017-02-25T12:56:43+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

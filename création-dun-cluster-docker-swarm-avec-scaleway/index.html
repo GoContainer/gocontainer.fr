@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+    <title>Création d&#39;un cluster docker swarm avec scaleway &middot; Go Container</title>
+    <meta name="generator" content="Hugo 0.18.1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Go Container">
+    
+      <meta name="description" content="">
+    
+    
+    <link rel="canonical" href="https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway"/>
+    <link rel="icon" href="https://gocontainer.fr/favicon.png">
+    <link rel="apple-touch-icon" href="https://gocontainer.fr/apple-touch-icon.png"/>
+
+    <link rel="stylesheet" href="https://gocontainer.fr/css/gocontainer.css">
+    <script src="https://gocontainer.fr/js/gocontainer.js"></script>
+
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-92255562-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://gocontainer.fr/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://gocontainer.fr/images/logo.png')"></i>
+          
+          <span class="site-title">Go Container</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://gocontainer.fr/">Home</a>
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://gocontainer.fr/contribuer/">Contribuer</a>
+          
+          
+      </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Recherche">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://gocontainer.fr/" />
+         </form>
+        </div>
+        <div class="social-header-link">
+            <a href="https://t.me/joinchat/AAAAAEJKT9LOIJlb07zBBg" target="_blank"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
+            <a href="https://github.com/GoContainer" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/GoContainer_fr" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://gocontainer.fr/">Home</a></td>
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://gocontainer.fr/contribuer/">Contribuer</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://gocontainer.fr/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+
+	    
+<section id="main">
+
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                <img src="https://gocontainer.fr/article/docker-swarm-scaleway/placeholder.png" class="article-banner">
+            
+
+            <header class="article-header">
+    <a href="https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway">
+    <h1 class="article-title" itemprop="name">
+        Création d&#39;un cluster docker swarm avec scaleway
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-02-25 12:56:43 &#43;0200 &#43;0200" itemprop="datePublished">25-02-2017</time>
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/categories/docker">docker</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/tags/docker">docker</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/tags/swarm">swarm</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/tags/scaleway">scaleway</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>Le but de cet article est de vous montrer comment créer votre premier cluster docker swarm avec <a href="https://www.scaleway.com/">Scaleway</a><br />
+Si vous ne maitrisez pas docker swarm, ce post est pour vous, sinon passez votre chemin ^^.</p>
+
+<h2 id="les-prérequis">Les prérequis</h2>
+
+<p>Au cours de ce petit tuto, vous aurez besoin d&rsquo;avoir :<br />
+ - Un compte <a href="https://cloud.scaleway.com">scaleway</a></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Comme je vous le disais, nous allons mettre en place un superbe petit cluster avec docker swarm, mais pourquoi en utiliser un ?<br />
+Il y&rsquo;a deux raisons assez simples :<br />
+ - Pour assurer une forte disponibilité de nos conteneurs<br />
+ - Permettre une gestion plus simple des conteneurs</p>
+
+<p>Afin de réaliser notre tuto, nous devons dans un premier temps ajouter des machines (instances).<br />
+Pour réaliser un cluster, nous avons théoriquement besoin de n&rsquo;avoir qu&rsquo;une seule machine, mais cela n&rsquo;aurait pas beaucoup d&rsquo;intérêt, donc nous allons créer 3 instances Scaleway.
+Il est bien sûr possible d&rsquo;utiliser un autre provider ou même de le faire en local, mais ce n&rsquo;est pas le but de ce tuto.
+Pour cela, allez sur scaleway, et prenez un nouveau serveur et configurez le comme la photo ci-dessous:</p>
+
+<p><img src="/article/docker-swarm-scaleway/configuration-server-scaleway.png" alt="docker configuration scaleway" /></p>
+
+<p>Reproduisez cela deux fois de plus en changeant le nom du serveur par respectivement <code>slave-01</code>et <code>slave-02</code></p>
+
+<h2 id="création-du-cluster-swarm">Création du cluster swarm</h2>
+
+<p>À ce stade, nous avons trois instances nommées :<br />
+- <code>master</code><br />
+- <code>slave-01</code><br />
+- <code>slave-02</code></p>
+
+<p>Les trois instances sont identiques, seuls les noms changent pour le moment.<br />
+Connectez-vous à master. Une fois celà fait, nous allons initialiser notre cluster avec cette commande:</p>
+
+<pre><code class="language-bash"> sudo apt upgrade &amp;&amp; sudo apt update
+ docker swarm init
+</code></pre>
+
+<p>Vous devriez avoir un retour qui, avec une commande docker, ressemble à ça :</p>
+
+<pre><code class="language-bash">docker swarm join \
+    --token SWMTKN-1-4k0lu04tuc9e8pd44cs8fz24pq386xhi11qz0ti3hdsxspshr2-8t9v1d9tgqiwbxqmtha8zynme \
+    10.2.16.197:2377
+</code></pre>
+
+<p>Lorsque vous avez fait le init, il a déclaré votre instance en tant que master et il a ensuite généré un token de sécurité.<br />
+Grâce à ce token, vous pouvez associer à un master des slaves.
+A la toute fin, vous avez 10.2.16.197:2377 qui est l&rsquo;ip du master de votre cluster docker swarm que vous venez de créer.<br />
+Maintenant, vous pouvez vous connecter sur vos 2 autres instances et lancer les commandes ci-dessous:</p>
+
+<pre><code class="language-bash"> sudo apt upgrade &amp;&amp; sudo apt update
+ docker swarm join \
+     --token SWMTKN-1-4k0lu04tuc9e8pd44cs8fz24pq386xhi11qz0ti3hdsxspshr2-8t9v1d9tgqiwbxqmtha8zynme \
+     10.2.16.197:2377
+</code></pre>
+
+<p>Voilà, vous venez de lier au master vos slaves. Retournez sur votre master, et lancez la commande <strong><code>docker node ls</code></strong>. Vous devriez avoir quelque chose comme cela :</p>
+
+<pre><code class="language-bash"> ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+ cw06z79p9ec23t839dcnuoz7s    slave-01  Ready   Active
+ hq58gsqla4gbjw3r93fsz5vks    slave-02  Ready   Active
+ np6evchytoowphk0uck5on8lp *  master    Ready   Active        Leader
+</code></pre>
+
+<p>Voilà, vous savez maintenant créer un docker swarm, c&rsquo;est facile non ?
+Maintenant, si vous devez ajouter 50 machines à votre cluster, cela reste simple, mais prends beaucoup de temps.</p>
+
+<p>Nous verrons une solution possible à ce problème dans un autre article :D.</p>
+
+<p>Avant de finir, je vous conseille d&rsquo;éteindre toutes les instances créées au cours de ce tuto pour ne pas avoir de surpise à la fin du mois.</p>
+
+<p>À la prochaine</p>
+
+            </div>
+            <footer class="article-footer">
+    <a data-url="https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway" data-id="34b7e8799275b40cdc0b420268407844" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Partage
+    </a>
+    
+    <a href="https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway#disqus_thread" class="article-comment-link">
+        Commentaires
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="https://gocontainer.fr/hack-pour-docker" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Ancien
+      </strong>
+      <div class="article-nav-title">Hack pour docker</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+
+    
+    <section id="comments">
+        <div id="disqus_thread">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'GoContainer';
+    var disqus_identifier = 'https:\/\/gocontainer.fr\/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway';
+    var disqus_title = 'Création d\x27un cluster docker swarm avec scaleway';
+    var disqus_url = 'https:\/\/gocontainer.fr\/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+    </section>
+    
+</section>
+
+
+		
+		<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="https://avatars2.githubusercontent.com/u/1903212?v=3&amp;s=460">
+      <h2 id="name">Jérémy Gréaux</h2>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        486
+        <span>Mots</span>
+      </div>
+      <div class="article-info-block">
+        3
+        <span>Minutes</span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/jeremygreaux" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//twitter.com/jeremygreaux" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+		
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      Go Container - © Copyright 2017
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+    <title>Hack pour docker &middot; Go Container</title>
+    <meta name="generator" content="Hugo 0.18.1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Go Container">
+    
+      <meta name="description" content="">
+    
+    
+    <link rel="canonical" href="https://gocontainer.fr/hack-pour-docker"/>
+    <link rel="icon" href="https://gocontainer.fr/favicon.png">
+    <link rel="apple-touch-icon" href="https://gocontainer.fr/apple-touch-icon.png"/>
+
+    <link rel="stylesheet" href="https://gocontainer.fr/css/gocontainer.css">
+    <script src="https://gocontainer.fr/js/gocontainer.js"></script>
+
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-92255562-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://gocontainer.fr/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://gocontainer.fr/images/logo.png')"></i>
+          
+          <span class="site-title">Go Container</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://gocontainer.fr/">Home</a>
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://gocontainer.fr/contribuer/">Contribuer</a>
+          
+          
+      </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Recherche">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://gocontainer.fr/" />
+         </form>
+        </div>
+        <div class="social-header-link">
+            <a href="https://t.me/joinchat/AAAAAEJKT9LOIJlb07zBBg" target="_blank"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
+            <a href="https://github.com/GoContainer" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/GoContainer_fr" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://gocontainer.fr/">Home</a></td>
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://gocontainer.fr/contribuer/">Contribuer</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://gocontainer.fr/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+
+	    
+<section id="main">
+
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                <img src="https://gocontainer.fr/article/hack-pour-docker/placeholder.png" class="article-banner">
+            
+
+            <header class="article-header">
+    <a href="https://gocontainer.fr/hack-pour-docker">
+    <h1 class="article-title" itemprop="name">
+        Hack pour docker
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-02-20 16:56:43 &#43;0200 &#43;0200" itemprop="datePublished">20-02-2017</time>
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/categories/docker">docker</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/tags/docker">docker</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://gocontainer.fr/tags/hack">hack</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>Dans ce post, j&rsquo;ai décidé de partager avec vous quelques commandes et outils utiles que j&rsquo;utilise fréquemment lorsque je travaille avec docker.
+Il n&rsquo;y a pas d&rsquo;ordre particulier ou de «niveau de nouveauté» pour chaque «hack». Je vais simplement présenter le cas d&rsquo;utilisation et la façon dont la commande spécifique ou
+l&rsquo;outil m&rsquo;a aidé avec mon travail.</p>
+
+<p><img src="/article/hack-pour-docker/docker_animals.png" alt="docker Animals" /></p>
+
+<h1 id="nettoyage">Nettoyage</h1>
+
+<p>Après avoir travaillé avec docker pendant un certain temps, vous commencez à accumuler de nombreux volumes, réseaux, conteneurs et images inutilisées.</p>
+
+<h2 id="une-commande-pour-les-gouverner-tous">Une commande pour «les gouverner tous»</h2>
+
+<pre><code class="language-BASH">docker system prune
+</code></pre>
+
+<p>Prune est une commande très utile (fonctionne aussi pour les sous-commandes de volume et de réseau), mais elle n&rsquo;est disponible que pour docker 1.13.
+Donc, si vous utilisez des versions docker plus anciennes, les commandes suivantes peuvent vous aider à remplacer la commande prune.</p>
+
+<h2 id="supprimer-les-volumes-de-dangling">Supprimer les volumes de dangling</h2>
+
+<p>Les volumes en &ldquo;dangling&rdquo; sont des volumes qui ne sont pas utilisés par aucun conteneur.
+Pour les supprimer, combinez deux commandes: d&rsquo;abord, listez les ID de volume pour les volumes suspendus, puis supprimez-les.</p>
+
+<pre><code class="language-BASH">docker rm $ (volume du docker ls -q -f &quot;dangling=true&quot;)
+</code></pre>
+
+<h2 id="supprimer-les-conteneurs-sortis">Supprimer les conteneurs sortis</h2>
+
+<p>Le même principe fonctionne ici aussi. Tout d&rsquo;abord, listez les conteneurs (uniquement les ID) que vous voulez supprimer (avec filtre) puis supprimez-les
+(utilisez rm -f pour forcer la suppresion).</p>
+
+<pre><code class="language-BASH">docker rm $ (docker ps -q -f &quot;status=exited&quot;)
+</code></pre>
+
+<h2 id="supprimer-dangling-images">Supprimer Dangling Images</h2>
+
+<p>Les images dangling sont des images non marquées, qui sont les feuilles de l&rsquo;arbre des images (pas des couches intermédiaires).</p>
+
+<pre><code class="language-BASH">docker rmi $ (images docker -q -f &quot;dangling=true&quot;)
+</code></pre>
+
+<h2 id="autoremove-interactive-containers">Autoremove Interactive Containers</h2>
+
+<p>Lorsque vous exécutez un nouveau conteneur et que vous souhaitez éviter de taper la commande rm après sa sortie, utilisez l&rsquo;option -rm.
+Ensuite, lorsque vous sortez du conteneur créé, il sera automatiquement détruit.</p>
+
+<pre><code class="language-BASH">docker run -it --rm alpine sh
+</code></pre>
+
+<h2 id="inspecter-les-ressources-de-docker">Inspecter les ressources de docker</h2>
+
+<p>Jq est un processeur léger et flexible de ligne de commande JSON. C&rsquo;est comme sed pour les données JSON. Vous pouvez l&rsquo;utiliser pour découper, filtrer, cartographier et
+transformer des données structurées avec la même facilité que sed, awk, grep.</p>
+
+<p>Les commandes docker info et docker inspect permmettent de retourner leur résultat en JSON, vous pouvez donc le combinez avec la commande jq.</p>
+
+<pre><code class="language-BASH"># Voir toute les informations
+$ docker info --format &quot;{{json.}}&quot; | Jq.
+
+# Voir seulement les plugins
+$ docker info --format &quot;{{json .Plugins}}&quot; | Jq.
+
+# Liste des adresses IP pour tous les conteneurs connectés au réseau 'bridge'
+$ docker network inspecter bridge -f '{{json .Containers}}' | Jq '. [] | {Cont: .Name, ip: .IPv4Address} '
+</code></pre>
+
+<h2 id="affichez-une-table-avec-id-image-status-pour-les-conteneurs-actifs-et-actualisez-le-toutes-les-2-secondes">Affichez une table avec &lsquo;ID Image Status&rsquo; pour les conteneurs actifs et actualisez-le toutes les 2 secondes</h2>
+
+<pre><code class="language-BASH">watch -n 2 'docker ps --format &quot;table {{.ID}} \ t {{.Image}} \ t {{.Status}}&quot;
+</code></pre>
+
+<h2 id="entrez-dans-le-namespace-de-l-host-container">Entrez dans le namespace de l&rsquo;Host / Container</h2>
+
+<p>Parfois, vous souhaitez vous connecter à l&rsquo;hôte Docker. La commande ssh est l&rsquo;option par défaut, mais cette option peut ne pas être disponible, en raison des paramètres de sécurité, des règles de pare-feu ou autre.<br />
+<a href="https://github.com/jpetazzo/nsenter">NScenter</a>, de Jérôme Petazzoni, est un petit outil très utile pour ces cas d&rsquo;utilisation. La commande nsenter vous permet de saisir des namespaces. J&rsquo;aime utiliser l&rsquo;image minimaliste (580 kB) walkerlee / nsenter docker.</p>
+
+<h2 id="entrer-dans-l-hôte-docker">Entrer dans l&rsquo;hôte docker</h2>
+
+<p>Vous pouvez utiliser &ndash;pid=host pour entrer dans les namespaces d&rsquo;hôtes docker.</p>
+
+<pre><code># Obtenir un shell dans l'hôte docker
+docker run --rm -it --privileged --pid = hôte walkerlee/nsenter -t 1 -m -u -i -n sh
+</code></pre>
+
+<h2 id="entrez-dans-tous-les-container">Entrez dans tous les container</h2>
+
+<p>Il est également possible d&rsquo;entrer dans n&rsquo;importe quel conteneur avec nsenter et &ndash;pid=container:[id OR name]. Mais dans la plupart des cas, il vaut mieux utiliser la commande `<code>docker exec</code>. La principale différence est que nsenter n&rsquo;entre pas dans les cgroups, et évite donc les limitations de ressources (ce qui peut être utile pour le débogage).</p>
+
+<pre><code># Obtenir un shell dans l'espace de noms de conteneur 'redis'
+docker run --rm -it --privileged --pid=conteneur:redis walkerlee/nsenter -t 1 -m -u -i -n sh
+</code></pre>
+
+<h2 id="créez-un-conteneur-avec-l-outil-htop">Créez un conteneur avec l&rsquo;outil &ldquo;htop&rdquo;</h2>
+
+<pre><code class="language-BASH">docker build -t htop - &lt;&lt; EOF
+FROM alpine
+RUN apk --no-cache ajouter htop
+EOF
+</code></pre>
+
+<h2 id="auto-completion">Auto-completion</h2>
+
+<p>La syntaxe de la CLI de docker est très riche et en croissance constante: ajout de nouvelles commandes et de nouvelles options. Il est difficile de se souvenir de toutes les commandes possibles et l&rsquo;option, donc avoir une auto-complétion est un must have.</p>
+
+<p>L&rsquo;auto-complétion vous permet de compléter automatiquement ou de suggérer automatiquement ce que vous tapez en appuyant sur la touche tabulation. L&rsquo;auto-complétion de docker fonctionne pour les commandes et les options.
+L&rsquo;auto-complétion est disponible pour :<br />
+- docker
+- docker-machine
+- docker-compose</p>
+
+<p>Si vous êtes un utilisateur de macOS, l&rsquo;installation est très simple et rapide avec homebrew.</p>
+
+<pre><code class="language-BASH">$ brew tap homebrew / complétions
+
+$ brew install docker-completion
+$ brew install docker-compose-completion
+$ brew install docker-machine-completion
+</code></pre>
+
+<p>Si vous n&rsquo;utilisez pas Mac, lisez la documentation officielle de docker pour l&rsquo;installation.</p>
+
+<h2 id="démarrer-les-conteneurs-automatiquement">Démarrer les conteneurs automatiquement</h2>
+
+<p>Lors de l&rsquo;exécution d&rsquo;un processus à l&rsquo;intérieur d&rsquo;un conteneur docker, une défaillance peut survenir en raison de plusieurs raisons.
+Dans certains cas, vous pouvez le corriger en réactivant le conteneur défaillant. Si vous utilisez un moteur d&rsquo;orchestration docker, comme Swarm ou Kubernetes, le service défaillant sera redémarré automatiquement.
+Dans le cas contraire, vous pouvez redémarrer le conteneur en fonction du code de sortie du processus principal du conteneur ou toujours le redémarrer (quel que soit le code de sortie).
+docker 1.12 a introduit la commande docker run: <code>restart</code> pour ce cas d&rsquo;utilisation.</p>
+
+<h2 id="redémarrer-toujours">Redémarrer toujours</h2>
+
+<p>Redémarrez le conteneur redis peut importe le code d&rsquo;erreur.</p>
+
+<pre><code class="language-BASH">docker run --restart=always redis
+</code></pre>
+
+<h2 id="redémarrer-conteneur-sur-échec">Redémarrer conteneur sur échec</h2>
+
+<p>Redémarrez le conteneur redis seulement si il est en échec et pas plus de 10 fois.</p>
+
+<pre><code class="language-BASH">docker run --restart=on-failure:10 redis
+</code></pre>
+
+<h2 id="trucs-de-réseau">Trucs de réseau</h2>
+
+<p>Il peut arriver que vous souhaitiez créer un nouveau conteneur et le connecter à une pile réseau existante. Il peut s&rsquo;agir du réseau hôte docker ou du réseau d&rsquo;un autre conteneur. Cela est utile lors du débogage et de l&rsquo;audit des problèmes réseau.
+L&rsquo;option docker &ndash;network/net vous permet de le faire.</p>
+
+<h2 id="utiliser-le-réseau-de-l-hôte-docker">Utiliser le réseau de l&rsquo;hôte docker</h2>
+
+<pre><code class="language-BASH">docker run --net=host ...
+</code></pre>
+
+<p>Le nouveau conteneur s&rsquo;attachera aux mêmes interfaces réseau que l&rsquo;hôte docker.</p>
+
+<h2 id="utiliser-le-réseau-d-un-autre-conteneur">Utiliser le réseau d&rsquo;un autre conteneur</h2>
+
+<pre><code class="language-BASH">docker run --net=container:&lt;nom | id&gt; ...
+</code></pre>
+
+<p>Le nouveau conteneur s&rsquo;attache aux mêmes interfaces réseau que l&rsquo;autre conteneur. Le conteneur cible peut être spécifié par id ou nom.</p>
+
+<p><a href="https://codefresh.io/blog/everyday-hacks-docker/">Source</a></p>
+
+            </div>
+            <footer class="article-footer">
+    <a data-url="https://gocontainer.fr/hack-pour-docker" data-id="07211c6d123a98f20e340deec2496e29" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Partage
+    </a>
+    
+    <a href="https://gocontainer.fr/hack-pour-docker#disqus_thread" class="article-comment-link">
+        Commentaires
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+
+    
+    <a href="https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Nouveau
+      </strong>
+      <div class="article-nav-title">Création d&#39;un cluster docker swarm avec scaleway</div>
+    </a>
+    
+</nav>
+
+
+    </article>
+
+    
+    <section id="comments">
+        <div id="disqus_thread">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'GoContainer';
+    var disqus_identifier = 'https:\/\/gocontainer.fr\/hack-pour-docker';
+    var disqus_title = 'Hack pour docker';
+    var disqus_url = 'https:\/\/gocontainer.fr\/hack-pour-docker';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+    </section>
+    
+</section>
+
+
+		
+		<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="https://codefresh.io/wp-content/uploads/2016/12/photo-bw-150x150.jpg">
+      <h2 id="name">Alexei Ledenev</h2>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        1043
+        <span>Mots</span>
+      </div>
+      <div class="article-info-block">
+        5
+        <span>Minutes</span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/alexei-led" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//twitter.com/alexeiled" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+		
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      Go Container - © Copyright 2017
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+</body>
+</html>

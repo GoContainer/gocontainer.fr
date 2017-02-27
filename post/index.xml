@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Go Container</title>
+    <link>https://gocontainer.fr/post/index.xml</link>
+    <description>Recent content in Posts on Go Container</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <copyright>Go Container - © Copyright</copyright>
+    <lastBuildDate>Sat, 25 Feb 2017 12:56:43 +0200</lastBuildDate>
+    <atom:link href="https://gocontainer.fr/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Création d&#39;un cluster docker swarm avec scaleway</title>
+      <link>https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway</link>
+      <pubDate>Sat, 25 Feb 2017 12:56:43 +0200</pubDate>
+      
+      <guid>https://gocontainer.fr/cr%C3%A9ation-dun-cluster-docker-swarm-avec-scaleway</guid>
+      <description>
+
+&lt;p&gt;Le but de cet article est de vous montrer comment créer votre premier cluster docker swarm avec &lt;a href=&#34;https://www.scaleway.com/&#34;&gt;Scaleway&lt;/a&gt;&lt;br /&gt;
+Si vous ne maitrisez pas docker swarm, ce post est pour vous, sinon passez votre chemin ^^.&lt;/p&gt;
+
+&lt;h2 id=&#34;les-prérequis&#34;&gt;Les prérequis&lt;/h2&gt;
+
+&lt;p&gt;Au cours de ce petit tuto, vous aurez besoin d&amp;rsquo;avoir :&lt;br /&gt;
+ - Un compte &lt;a href=&#34;https://cloud.scaleway.com&#34;&gt;scaleway&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Comme je vous le disais, nous allons mettre en place un superbe petit cluster avec docker swarm, mais pourquoi en utiliser un ?&lt;br /&gt;
+Il y&amp;rsquo;a deux raisons assez simples :&lt;br /&gt;
+ - Pour assurer une forte disponibilité de nos conteneurs&lt;br /&gt;
+ - Permettre une gestion plus simple des conteneurs&lt;/p&gt;
+
+&lt;p&gt;Afin de réaliser notre tuto, nous devons dans un premier temps ajouter des machines (instances).&lt;br /&gt;
+Pour réaliser un cluster, nous avons théoriquement besoin de n&amp;rsquo;avoir qu&amp;rsquo;une seule machine, mais cela n&amp;rsquo;aurait pas beaucoup d&amp;rsquo;intérêt, donc nous allons créer 3 instances Scaleway.
+Il est bien sûr possible d&amp;rsquo;utiliser un autre provider ou même de le faire en local, mais ce n&amp;rsquo;est pas le but de ce tuto.
+Pour cela, allez sur scaleway, et prenez un nouveau serveur et configurez le comme la photo ci-dessous:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gocontainer.fr/article/docker-swarm-scaleway/configuration-server-scaleway.png&#34; alt=&#34;docker configuration scaleway&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Reproduisez cela deux fois de plus en changeant le nom du serveur par respectivement &lt;code&gt;slave-01&lt;/code&gt;et &lt;code&gt;slave-02&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;création-du-cluster-swarm&#34;&gt;Création du cluster swarm&lt;/h2&gt;
+
+&lt;p&gt;À ce stade, nous avons trois instances nommées :&lt;br /&gt;
+- &lt;code&gt;master&lt;/code&gt;&lt;br /&gt;
+- &lt;code&gt;slave-01&lt;/code&gt;&lt;br /&gt;
+- &lt;code&gt;slave-02&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Les trois instances sont identiques, seuls les noms changent pour le moment.&lt;br /&gt;
+Connectez-vous à master. Une fois celà fait, nous allons initialiser notre cluster avec cette commande:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; sudo apt upgrade &amp;amp;&amp;amp; sudo apt update
+ docker swarm init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Vous devriez avoir un retour qui, avec une commande docker, ressemble à ça :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker swarm join \
+    --token SWMTKN-1-4k0lu04tuc9e8pd44cs8fz24pq386xhi11qz0ti3hdsxspshr2-8t9v1d9tgqiwbxqmtha8zynme \
+    10.2.16.197:2377
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lorsque vous avez fait le init, il a déclaré votre instance en tant que master et il a ensuite généré un token de sécurité.&lt;br /&gt;
+Grâce à ce token, vous pouvez associer à un master des slaves.
+A la toute fin, vous avez 10.2.16.197:2377 qui est l&amp;rsquo;ip du master de votre cluster docker swarm que vous venez de créer.&lt;br /&gt;
+Maintenant, vous pouvez vous connecter sur vos 2 autres instances et lancer les commandes ci-dessous:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; sudo apt upgrade &amp;amp;&amp;amp; sudo apt update
+ docker swarm join \
+     --token SWMTKN-1-4k0lu04tuc9e8pd44cs8fz24pq386xhi11qz0ti3hdsxspshr2-8t9v1d9tgqiwbxqmtha8zynme \
+     10.2.16.197:2377
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Voilà, vous venez de lier au master vos slaves. Retournez sur votre master, et lancez la commande &lt;strong&gt;&lt;code&gt;docker node ls&lt;/code&gt;&lt;/strong&gt;. Vous devriez avoir quelque chose comme cela :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+ cw06z79p9ec23t839dcnuoz7s    slave-01  Ready   Active
+ hq58gsqla4gbjw3r93fsz5vks    slave-02  Ready   Active
+ np6evchytoowphk0uck5on8lp *  master    Ready   Active        Leader
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Voilà, vous savez maintenant créer un docker swarm, c&amp;rsquo;est facile non ?
+Maintenant, si vous devez ajouter 50 machines à votre cluster, cela reste simple, mais prends beaucoup de temps.&lt;/p&gt;
+
+&lt;p&gt;Nous verrons une solution possible à ce problème dans un autre article :D.&lt;/p&gt;
+
+&lt;p&gt;Avant de finir, je vous conseille d&amp;rsquo;éteindre toutes les instances créées au cours de ce tuto pour ne pas avoir de surpise à la fin du mois.&lt;/p&gt;
+
+&lt;p&gt;À la prochaine&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hack pour docker</title>
+      <link>https://gocontainer.fr/hack-pour-docker</link>
+      <pubDate>Mon, 20 Feb 2017 16:56:43 +0200</pubDate>
+      
+      <guid>https://gocontainer.fr/hack-pour-docker</guid>
+      <description>
+
+&lt;p&gt;Dans ce post, j&amp;rsquo;ai décidé de partager avec vous quelques commandes et outils utiles que j&amp;rsquo;utilise fréquemment lorsque je travaille avec docker.
+Il n&amp;rsquo;y a pas d&amp;rsquo;ordre particulier ou de «niveau de nouveauté» pour chaque «hack». Je vais simplement présenter le cas d&amp;rsquo;utilisation et la façon dont la commande spécifique ou
+l&amp;rsquo;outil m&amp;rsquo;a aidé avec mon travail.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gocontainer.fr/article/hack-pour-docker/docker_animals.png&#34; alt=&#34;docker Animals&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;nettoyage&#34;&gt;Nettoyage&lt;/h1&gt;
+
+&lt;p&gt;Après avoir travaillé avec docker pendant un certain temps, vous commencez à accumuler de nombreux volumes, réseaux, conteneurs et images inutilisées.&lt;/p&gt;
+
+&lt;h2 id=&#34;une-commande-pour-les-gouverner-tous&#34;&gt;Une commande pour «les gouverner tous»&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker system prune
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Prune est une commande très utile (fonctionne aussi pour les sous-commandes de volume et de réseau), mais elle n&amp;rsquo;est disponible que pour docker 1.13.
+Donc, si vous utilisez des versions docker plus anciennes, les commandes suivantes peuvent vous aider à remplacer la commande prune.&lt;/p&gt;
+
+&lt;h2 id=&#34;supprimer-les-volumes-de-dangling&#34;&gt;Supprimer les volumes de dangling&lt;/h2&gt;
+
+&lt;p&gt;Les volumes en &amp;ldquo;dangling&amp;rdquo; sont des volumes qui ne sont pas utilisés par aucun conteneur.
+Pour les supprimer, combinez deux commandes: d&amp;rsquo;abord, listez les ID de volume pour les volumes suspendus, puis supprimez-les.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker rm $ (volume du docker ls -q -f &amp;quot;dangling=true&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;supprimer-les-conteneurs-sortis&#34;&gt;Supprimer les conteneurs sortis&lt;/h2&gt;
+
+&lt;p&gt;Le même principe fonctionne ici aussi. Tout d&amp;rsquo;abord, listez les conteneurs (uniquement les ID) que vous voulez supprimer (avec filtre) puis supprimez-les
+(utilisez rm -f pour forcer la suppresion).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker rm $ (docker ps -q -f &amp;quot;status=exited&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;supprimer-dangling-images&#34;&gt;Supprimer Dangling Images&lt;/h2&gt;
+
+&lt;p&gt;Les images dangling sont des images non marquées, qui sont les feuilles de l&amp;rsquo;arbre des images (pas des couches intermédiaires).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker rmi $ (images docker -q -f &amp;quot;dangling=true&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;autoremove-interactive-containers&#34;&gt;Autoremove Interactive Containers&lt;/h2&gt;
+
+&lt;p&gt;Lorsque vous exécutez un nouveau conteneur et que vous souhaitez éviter de taper la commande rm après sa sortie, utilisez l&amp;rsquo;option -rm.
+Ensuite, lorsque vous sortez du conteneur créé, il sera automatiquement détruit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker run -it --rm alpine sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;inspecter-les-ressources-de-docker&#34;&gt;Inspecter les ressources de docker&lt;/h2&gt;
+
+&lt;p&gt;Jq est un processeur léger et flexible de ligne de commande JSON. C&amp;rsquo;est comme sed pour les données JSON. Vous pouvez l&amp;rsquo;utiliser pour découper, filtrer, cartographier et
+transformer des données structurées avec la même facilité que sed, awk, grep.&lt;/p&gt;
+
+&lt;p&gt;Les commandes docker info et docker inspect permmettent de retourner leur résultat en JSON, vous pouvez donc le combinez avec la commande jq.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;# Voir toute les informations
+$ docker info --format &amp;quot;{{json.}}&amp;quot; | Jq.
+
+# Voir seulement les plugins
+$ docker info --format &amp;quot;{{json .Plugins}}&amp;quot; | Jq.
+
+# Liste des adresses IP pour tous les conteneurs connectés au réseau &#39;bridge&#39;
+$ docker network inspecter bridge -f &#39;{{json .Containers}}&#39; | Jq &#39;. [] | {Cont: .Name, ip: .IPv4Address} &#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;affichez-une-table-avec-id-image-status-pour-les-conteneurs-actifs-et-actualisez-le-toutes-les-2-secondes&#34;&gt;Affichez une table avec &amp;lsquo;ID Image Status&amp;rsquo; pour les conteneurs actifs et actualisez-le toutes les 2 secondes&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;watch -n 2 &#39;docker ps --format &amp;quot;table {{.ID}} \ t {{.Image}} \ t {{.Status}}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;entrez-dans-le-namespace-de-l-host-container&#34;&gt;Entrez dans le namespace de l&amp;rsquo;Host / Container&lt;/h2&gt;
+
+&lt;p&gt;Parfois, vous souhaitez vous connecter à l&amp;rsquo;hôte Docker. La commande ssh est l&amp;rsquo;option par défaut, mais cette option peut ne pas être disponible, en raison des paramètres de sécurité, des règles de pare-feu ou autre.&lt;br /&gt;
+&lt;a href=&#34;https://github.com/jpetazzo/nsenter&#34;&gt;NScenter&lt;/a&gt;, de Jérôme Petazzoni, est un petit outil très utile pour ces cas d&amp;rsquo;utilisation. La commande nsenter vous permet de saisir des namespaces. J&amp;rsquo;aime utiliser l&amp;rsquo;image minimaliste (580 kB) walkerlee / nsenter docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;entrer-dans-l-hôte-docker&#34;&gt;Entrer dans l&amp;rsquo;hôte docker&lt;/h2&gt;
+
+&lt;p&gt;Vous pouvez utiliser &amp;ndash;pid=host pour entrer dans les namespaces d&amp;rsquo;hôtes docker.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Obtenir un shell dans l&#39;hôte docker
+docker run --rm -it --privileged --pid = hôte walkerlee/nsenter -t 1 -m -u -i -n sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;entrez-dans-tous-les-container&#34;&gt;Entrez dans tous les container&lt;/h2&gt;
+
+&lt;p&gt;Il est également possible d&amp;rsquo;entrer dans n&amp;rsquo;importe quel conteneur avec nsenter et &amp;ndash;pid=container:[id OR name]. Mais dans la plupart des cas, il vaut mieux utiliser la commande `&lt;code&gt;docker exec&lt;/code&gt;. La principale différence est que nsenter n&amp;rsquo;entre pas dans les cgroups, et évite donc les limitations de ressources (ce qui peut être utile pour le débogage).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Obtenir un shell dans l&#39;espace de noms de conteneur &#39;redis&#39;
+docker run --rm -it --privileged --pid=conteneur:redis walkerlee/nsenter -t 1 -m -u -i -n sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;créez-un-conteneur-avec-l-outil-htop&#34;&gt;Créez un conteneur avec l&amp;rsquo;outil &amp;ldquo;htop&amp;rdquo;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker build -t htop - &amp;lt;&amp;lt; EOF
+FROM alpine
+RUN apk --no-cache ajouter htop
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;auto-completion&#34;&gt;Auto-completion&lt;/h2&gt;
+
+&lt;p&gt;La syntaxe de la CLI de docker est très riche et en croissance constante: ajout de nouvelles commandes et de nouvelles options. Il est difficile de se souvenir de toutes les commandes possibles et l&amp;rsquo;option, donc avoir une auto-complétion est un must have.&lt;/p&gt;
+
+&lt;p&gt;L&amp;rsquo;auto-complétion vous permet de compléter automatiquement ou de suggérer automatiquement ce que vous tapez en appuyant sur la touche tabulation. L&amp;rsquo;auto-complétion de docker fonctionne pour les commandes et les options.
+L&amp;rsquo;auto-complétion est disponible pour :&lt;br /&gt;
+- docker
+- docker-machine
+- docker-compose&lt;/p&gt;
+
+&lt;p&gt;Si vous êtes un utilisateur de macOS, l&amp;rsquo;installation est très simple et rapide avec homebrew.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;$ brew tap homebrew / complétions
+
+$ brew install docker-completion
+$ brew install docker-compose-completion
+$ brew install docker-machine-completion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Si vous n&amp;rsquo;utilisez pas Mac, lisez la documentation officielle de docker pour l&amp;rsquo;installation.&lt;/p&gt;
+
+&lt;h2 id=&#34;démarrer-les-conteneurs-automatiquement&#34;&gt;Démarrer les conteneurs automatiquement&lt;/h2&gt;
+
+&lt;p&gt;Lors de l&amp;rsquo;exécution d&amp;rsquo;un processus à l&amp;rsquo;intérieur d&amp;rsquo;un conteneur docker, une défaillance peut survenir en raison de plusieurs raisons.
+Dans certains cas, vous pouvez le corriger en réactivant le conteneur défaillant. Si vous utilisez un moteur d&amp;rsquo;orchestration docker, comme Swarm ou Kubernetes, le service défaillant sera redémarré automatiquement.
+Dans le cas contraire, vous pouvez redémarrer le conteneur en fonction du code de sortie du processus principal du conteneur ou toujours le redémarrer (quel que soit le code de sortie).
+docker 1.12 a introduit la commande docker run: &lt;code&gt;restart&lt;/code&gt; pour ce cas d&amp;rsquo;utilisation.&lt;/p&gt;
+
+&lt;h2 id=&#34;redémarrer-toujours&#34;&gt;Redémarrer toujours&lt;/h2&gt;
+
+&lt;p&gt;Redémarrez le conteneur redis peut importe le code d&amp;rsquo;erreur.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker run --restart=always redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;redémarrer-conteneur-sur-échec&#34;&gt;Redémarrer conteneur sur échec&lt;/h2&gt;
+
+&lt;p&gt;Redémarrez le conteneur redis seulement si il est en échec et pas plus de 10 fois.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker run --restart=on-failure:10 redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;trucs-de-réseau&#34;&gt;Trucs de réseau&lt;/h2&gt;
+
+&lt;p&gt;Il peut arriver que vous souhaitiez créer un nouveau conteneur et le connecter à une pile réseau existante. Il peut s&amp;rsquo;agir du réseau hôte docker ou du réseau d&amp;rsquo;un autre conteneur. Cela est utile lors du débogage et de l&amp;rsquo;audit des problèmes réseau.
+L&amp;rsquo;option docker &amp;ndash;network/net vous permet de le faire.&lt;/p&gt;
+
+&lt;h2 id=&#34;utiliser-le-réseau-de-l-hôte-docker&#34;&gt;Utiliser le réseau de l&amp;rsquo;hôte docker&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker run --net=host ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Le nouveau conteneur s&amp;rsquo;attachera aux mêmes interfaces réseau que l&amp;rsquo;hôte docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;utiliser-le-réseau-d-un-autre-conteneur&#34;&gt;Utiliser le réseau d&amp;rsquo;un autre conteneur&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-BASH&#34;&gt;docker run --net=container:&amp;lt;nom | id&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Le nouveau conteneur s&amp;rsquo;attache aux mêmes interfaces réseau que l&amp;rsquo;autre conteneur. Le conteneur cible peut être spécifié par id ou nom.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://codefresh.io/blog/everyday-hacks-docker/&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
