@@ -7,13 +7,13 @@ social:
 
 banner: "article/docker-swarm-scaleway/placeholder.png"
 categories:
-- docker
+  - docker
 date: 2017-02-25T12:56:43+02:00
 menu: ""
 tags:
-- docker
-- swarm
-- scaleway
+  - docker
+  - swarm
+  - scaleway
 title: Création d'un cluster docker swarm avec scaleway
 ---
 Le but de cet article est de vous montrer comment créer votre premier cluster docker swarm avec [Scaleway](https://www.scaleway.com/)  

@@ -7,12 +7,12 @@ social:
 
 banner: "article/hack-pour-docker/placeholder.png"
 categories:
-- docker
+  - docker
 date: 2017-02-20T16:56:43+02:00
 menu: ""
 tags:
-- docker
-- hack
+  - docker
+  - hack
 title: Hack pour docker
 ---
 Dans ce post, j'ai décidé de partager avec vous quelques commandes et outils utiles que j'utilise fréquemment lorsque je travaille avec docker. 
